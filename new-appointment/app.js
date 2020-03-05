@@ -1,5 +1,5 @@
-// const axios = require('axios')
-// const url = 'http://checkip.amazonaws.com/';
+const { parse } = require('querystring');
+
 let response;
 
 /**
@@ -15,14 +15,12 @@ let response;
  * 
  */
 exports.lambdaHandler = async (event, context) => {
+    const formPost = parse(event.body)
+
     try {
-        // const ret = await axios(url);
         response = {
             'statusCode': 200,
-            'body': JSON.stringify({
-                message: 'hello world',
-                // location: ret.data.trim()
-            })
+            'body': JSON.stringify(formPost, 0, 2)
         }
     } catch (err) {
         console.log(err);
